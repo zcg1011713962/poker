@@ -1,0 +1,8 @@
+/log/
+/.git/
+/.idea/
+/*/target/
+/*.iml
+/*/*.iml
+/*/*/*/*.iml
+/*/log/*

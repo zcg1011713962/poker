@@ -1,0 +1,35 @@
+server:
+  port: 18100 #工程端口
+logging:
+    level:
+      root: info
+    file:
+      path: user-java/log
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: user-java
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        fail-fast: true
+        group: spring-cloud
+  datasource:
+    url: jdbc:mysql://192.168.117.200:33087/mdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    protocol: nacos
+    address: nacos://127.0.0.1:8848
+    group: dubbo
+  scan: # dubbo的服务路径
+    base-packages: org.cloud.service.impl
+  cloud:
+    subscribed-services: chat-java
