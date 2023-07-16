@@ -1,6 +1,6 @@
 ## 1、模块名称
 
-chat-java
+chat-java 交谈模块
 
 ## 2、模块说明
 
