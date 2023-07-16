@@ -36,7 +36,7 @@ javascript、html、jquery、boodstrap实现
 
 ##### 3.3.1 智能问答
 ![1689512516557](https://github.com/zcg1011713962/spring-cloud-system/blob/master/assets/1689512516557.jpg)
-
+![1689512660390](https://github.com/zcg1011713962/spring-cloud-system/blob/master/assets/1689512660390.png)
 
 ##### 3.3.2 根据文本生成图片
 
