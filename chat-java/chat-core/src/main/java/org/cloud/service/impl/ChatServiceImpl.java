@@ -4,12 +4,13 @@ import cn.hutool.json.JSONUtil;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import lombok.extern.slf4j.Slf4j;
-import org.cloud.entity.*;
+import cloud.entity.*;
 import org.cloud.entity.common.BaseResponse;
 import org.cloud.entity.exception.FutureException;
 import org.cloud.properties.OpenAIProperties;
 import org.cloud.service.ChatService;
 import org.cloud.util.HttpUtil;
+import org.cloud.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

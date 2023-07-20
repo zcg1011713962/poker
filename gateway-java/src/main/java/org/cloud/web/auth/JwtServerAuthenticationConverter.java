@@ -2,11 +2,9 @@ package org.cloud.web.auth;
 
 import org.cloud.util.JwtUtil;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.server.RequestPath;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.util.StringUtils;

@@ -1,7 +1,7 @@
 package org.cloud.controller;
 
 import org.cloud.entity.common.BaseResponse;
-import org.cloud.entity.request.web.RtspRequest;
+import org.cloud.web.RtspRequest;
 import org.cloud.netty.service.RtspService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

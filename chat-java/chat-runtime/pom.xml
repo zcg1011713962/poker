@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>chat-java</artifactId>
-        <groupId>org.cloud</groupId>
+        <groupId>cloud</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
     <artifactId>chat-runtime</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.cloud</groupId>
+            <groupId>cloud</groupId>
             <artifactId>chat-web</artifactId>
             <version>${revision}</version>
         </dependency>

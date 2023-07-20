@@ -30,6 +30,6 @@ dubbo:
     address: nacos://127.0.0.1:8848
     group: dubbo
   scan: # dubbo的服务路径
-    base-packages: org.cloud.service.impl
+    base-packages: cloud.service.impl
   cloud:
     subscribed-services: chat-java

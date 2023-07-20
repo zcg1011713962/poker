@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.cloud</groupId>
+    <groupId>cloud</groupId>
     <artifactId>spring-cloud-system</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
@@ -15,6 +15,7 @@
         <module>dubbo-api</module>
         <module>chat-java</module>
         <module>video-java</module>
+        <module>network-java</module>
     </modules>
 
     <properties>

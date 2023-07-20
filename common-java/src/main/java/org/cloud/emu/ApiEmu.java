@@ -1,7 +1,7 @@
 package org.cloud.emu;
 
 
-import cst.APIConstant;
+import org.cloud.cst.APIConstant;
 
 public enum ApiEmu {
     CHAT(APIConstant.CHAT,"创建聊天完成", APIConstant.DEFAULT_RATE_LIMITER),

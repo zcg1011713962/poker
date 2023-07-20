@@ -1,6 +1,6 @@
 package org.cloud.controller;
 
-import cst.APIConstant;
+import org.cloud.cst.APIConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.annotation.ApiMonitor;
 import org.cloud.emu.ApiEmu;
