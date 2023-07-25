@@ -16,21 +16,17 @@ public class BaseResponse<T> implements Serializable {
     private int status;
     private String message;
     private T data;
-    private static BaseResponse success = new BaseResponse(HttpStatus.HTTP_OK, "success" , null);
-    private static BaseResponse exception = new BaseResponse(HttpStatus.HTTP_INTERNAL_ERROR, null , null);
 
     public static BaseResponse success(Object data) {
-        success.setData(data);
-        return success;
+        return new BaseResponse(HttpStatus.HTTP_OK, "成功" , data);
     }
 
     public static BaseResponse exception(Object data) {
-        success.setData(data);
-        return exception;
+        return new BaseResponse(HttpStatus.HTTP_INTERNAL_ERROR, "异常" , data);
     }
 
     public static BaseResponse failed(int status, Object data) {
-        return new BaseResponse<>(status, null, data);
+        return new BaseResponse<>(status, "失败", data);
     }
 
 }

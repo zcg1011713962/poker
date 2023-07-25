@@ -17,5 +17,11 @@
             <artifactId>chat-core</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cloud</groupId>
+            <artifactId>dubbo-api</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package org.cloud.config;
 
+import org.cloud.cst.APIConstant;
 import org.cloud.util.JwtUtil;
 import org.cloud.web.auth.JwtAuthenticationFailureHandler;
 import org.cloud.web.auth.JwtAuthenticationManager;
@@ -18,17 +19,20 @@ import org.springframework.security.web.server.authentication.AuthenticationWebF
 public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, JwtUtil jwtUtil) {
-        return http.csrf().disable().formLogin().disable().httpBasic().disable()
-                .authorizeExchange()
-                    .pathMatchers(HttpMethod.POST,"/api/login").permitAll() // 允许登录请求
-                    .anyExchange().authenticated()// 其他请求需要身份验证
-                    .and()
+        return http
+                .cors().disable().addFilterAt(new CorsConfig(), SecurityWebFiltersOrder.CORS)
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
+                .authorizeExchange().pathMatchers(HttpMethod.POST, APIConstant.GATEWAY_LOGIN).permitAll()
+                .anyExchange().authenticated().and()
                 .addFilterAt(authenticationFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION)
                 .build();
     }
 
     /**
      * 校验过滤器
+     *
      * @param jwtUtil JWT工具类
      * @return
      */

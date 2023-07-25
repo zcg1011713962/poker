@@ -1,8 +1,8 @@
 package org.cloud.controller;
 
-import org.cloud.cst.APIConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.annotation.ApiMonitor;
+import org.cloud.cst.APIConstant;
 import org.cloud.emu.ApiEmu;
 import org.cloud.entity.ChatRequest;
 import org.cloud.entity.common.BaseResponse;
@@ -19,8 +19,8 @@ public class ChatController{
     @Autowired
     private ChatService<BaseResponse> chatService;
 
-    @ApiMonitor(ApiEmu.CHAT_COUNT)
-    @PostMapping(APIConstant.CHAT)
+    @ApiMonitor(ApiEmu.CHAT_COMPLETIONS)
+    @PostMapping(APIConstant.CHAT_COMPLETIONS)
     public Mono<BaseResponse> chat(@RequestBody ChatRequest chatRequest) {
         log.info("{}", chatRequest);
         return Mono.fromFuture(chatService.completions(chatRequest));

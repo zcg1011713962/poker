@@ -20,8 +20,8 @@ public class ImageController {
     @Autowired
     private ChatService<BaseResponse> chatService;
 
-    @ApiMonitor(ApiEmu.IMAGES_GENERATIONS)
-    @PostMapping(APIConstant.IMAGES_GENERATIONS)
+    @ApiMonitor(ApiEmu.CHAT_IMAGES_GENERATIONS)
+    @PostMapping(APIConstant.CHAT_IMAGES_GENERATIONS)
     Mono<BaseResponse> createImages(@RequestBody ImageRequest imageRequest) {
         log.info("{}", imageRequest);
         return Mono.fromFuture(chatService.createImages(imageRequest));

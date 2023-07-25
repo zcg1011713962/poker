@@ -10,6 +10,8 @@ open:
     apiBaseUrl: https://api.openai.com
     authorization: Bearer xxxxxxxxxxxxxxx
 spring:
+  main:
+    allow-circular-references: true
   application:
     name: chat-java
   redis:

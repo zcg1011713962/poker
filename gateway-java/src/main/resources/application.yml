@@ -3,6 +3,10 @@ server:
 logging:
     level:
       root: info
+      org:
+        springframework:
+          web:
+            reactive: debug
     file:
       path: gateway-java/log
 spring:
@@ -22,8 +26,8 @@ spring:
           enabled: true
       routes:
         - id: chat-java # 聊天服务
-          uri: lb://chat-java
-          predicates:
+          uri: lb://chat-java #目标服务地址
+          predicates: # 谓词/断言
             - Path=/api/v1/chat/**
           filters:
             - StripPrefix=1

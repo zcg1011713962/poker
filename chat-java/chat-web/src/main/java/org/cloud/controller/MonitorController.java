@@ -21,7 +21,7 @@ public class MonitorController {
     @ApiMonitor(ApiEmu.CHAT_COUNT)
     @GetMapping(APIConstant.CHAT_COUNT)
     public Mono<BaseResponse<JSONObject>> chatCount() {
-        Object count = redisUtil.get(ApiEmu.CHAT.getDescribe());
+        Object count = redisUtil.get(ApiEmu.CHAT_COMPLETIONS.getDescribe());
         JSONObject json = new JSONObject();
         json.set("count", count == null ? 0 : count);
         return Mono.just(BaseResponse.success(json));

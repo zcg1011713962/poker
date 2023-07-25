@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
             }
             return baseResponse;
         }).exceptionally(e->{
-            return BaseResponse.exception(e.getMessage());
+            return BaseResponse.exception(e.getMessage() == null ? e.getCause().getMessage() : e.getMessage());
         });
     }
 

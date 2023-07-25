@@ -1,5 +1,7 @@
 package org.cloud.web.auth;
 
+import lombok.extern.slf4j.Slf4j;
+import org.cloud.cst.APIConstant;
 import org.cloud.util.JwtUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -10,6 +12,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.Objects;
 /**
  * 校验
  */
+@Slf4j
 public class JwtServerAuthenticationConverter implements ServerAuthenticationConverter {
     private final JwtUtil jwtUtil;
 
@@ -30,6 +34,7 @@ public class JwtServerAuthenticationConverter implements ServerAuthenticationCon
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
         String token = extractTokenFromHeader(exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION));
+        log.info("request:{} token:{}", exchange.getRequest().getPath(), token);
         if (StringUtils.hasText(token)) {
             try {
                 if (jwtUtil.validateToken(token)) {
@@ -50,7 +55,7 @@ public class JwtServerAuthenticationConverter implements ServerAuthenticationCon
             }
         }else{
             String path = exchange.getRequest().getPath().pathWithinApplication().value();
-            if (Objects.equals(path, "/api/login")) {
+            if (Objects.equals(path, APIConstant.GATEWAY_LOGIN)) {
                 // 跳过认证
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         true, null, null);
