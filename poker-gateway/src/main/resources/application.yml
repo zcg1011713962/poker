@@ -1,0 +1,49 @@
+server:
+  port: 18000 #工程端口
+logging:
+    level:
+      root: info
+      org:
+        springframework:
+          web:
+            reactive: debug
+    file:
+      path: poker-gateway/log
+spring:
+  application:
+    name: poker-gateway
+  main:
+    allow-circular-references: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        fail-fast: true
+        group: spring-cloud
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: poker-im # 聊天服务
+          uri: lb://poker-im #目标服务地址
+          predicates: # 谓词/断言
+            - Path=/api/v1/chat/**
+          filters:
+            - StripPrefix=1
+        - id: poker-video # 视频服务
+          uri: lb://poker-video
+          predicates:
+            - Path=/api/v1/video/**
+          filters:
+            - StripPrefix=1
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    protocol: nacos
+    address: nacos://127.0.0.1:8848
+    group: dubbo
+  cloud:
+    subscribed-services: poker-user

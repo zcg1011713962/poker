@@ -5,17 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cloud</groupId>
-    <artifactId>spring-cloud-system</artifactId>
+    <artifactId>poker</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
     <modules>
-        <module>gateway-java</module>
-        <module>common-java</module>
-        <module>user-java</module>
-        <module>dubbo-api</module>
-        <module>chat-java</module>
-        <module>video-java</module>
-        <module>network-java</module>
+        <module>poker-gateway</module>
+        <module>poker-common</module>
+        <module>poker-user</module>
+        <module>poker-rpc-api</module>
+        <module>poker-im</module>
+        <module>poker-video</module>
+        <module>poker-net</module>
+        <module>poker-dz</module>
     </modules>
 
     <properties>

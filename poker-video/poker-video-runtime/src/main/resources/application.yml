@@ -1,0 +1,34 @@
+server:
+  port: 21000 #工程端口
+logging:
+    level:
+      root: info
+    file:
+      path: poker-video/log
+rtsp:
+  enable: true
+  proxy: false
+websocket:
+  enable: true
+  proxy: false
+spring:
+  application:
+    name: poker-video
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        fail-fast: true
+        group: spring-cloud
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    protocol: nacos
+    address: nacos://127.0.0.1:8848
+    group: dubbo
+  scan: # dubbo的服务路径
+    base-packages: cloud.service.impl
+  cloud:
+    subscribed-services: poker-user
