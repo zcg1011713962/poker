@@ -44,7 +44,7 @@ public class RtspClient<T> extends AbstractClient<CompletableFuture<BaseResponse
             rtspEntity = new RtspEntity(rtspParser.getUri(), rtspParser.getUsername(), rtspParser.getPassword());
             manager();
         } else {
-            CompletableFuture.completedFuture(new FutureException("解析url错误"));
+            CompletableFuture.completedFuture(FutureException.show("解析url错误"));
         }
         return connect().thenApply(success -> {
             if (success.getStatus() == HttpStatus.HTTP_OK) {
@@ -72,7 +72,7 @@ public class RtspClient<T> extends AbstractClient<CompletableFuture<BaseResponse
         try {
             RtspUrlParser rtspUrlParser = new RtspUrlParser(url);
             if (!rtspUrlParser.parse()) {
-                cFuture.completeExceptionally(new FutureException("检查RTSP地址"));
+                cFuture.completeExceptionally(FutureException.show("检查RTSP地址"));
             }
             getTcpClient().connect(new InetSocketAddress(rtspUrlParser.getIp(), rtspUrlParser.getPort())).addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {

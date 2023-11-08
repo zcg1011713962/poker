@@ -20,7 +20,9 @@ public class ServerManager {
     }
 
     public static Server server(String channelId) {
-        if (StrUtil.isBlank(channelId))  throw new FutureException("channelId is null");
+        if (StrUtil.isBlank(channelId)) {
+            throw FutureException.show("channelId is null");
+        }
         Iterator<Map.Entry<String, Server>> it = serverMap.entrySet().iterator();
         while (it.hasNext()) {
             Server server = it.next().getValue();
@@ -29,7 +31,7 @@ public class ServerManager {
                 return server;
             }
         }
-        throw new FutureException("根据channelId" + channelId + "获取不到server");
+        throw FutureException.show("根据channelId" + channelId + "获取不到server");
     }
 
     public static Server remove(String serverId) {

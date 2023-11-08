@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cloud</groupId>
+    <artifactId>poker</artifactId>
+    <version>1.0</version>
+  </parent>
+  <groupId>cloud</groupId>
+  <artifactId>poker-dz</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>poker-dz-core</module>
+    <module>poker-dz-runtime</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>cloud</groupId>
+      <artifactId>poker-common</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>cloud</groupId>
+      <artifactId>poker-net</artifactId>
+      <version>${revision}</version>
+    </dependency>
+  </dependencies>
+</project>

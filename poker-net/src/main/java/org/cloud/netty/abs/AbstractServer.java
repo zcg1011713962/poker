@@ -38,7 +38,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
             channelHandler = optional.get();
             return;
         }
-        throw new FutureException("请检查是否配置了正确的channelHandler");
+        throw FutureException.show("请检查是否配置了正确的channelHandler");
     }
 
     @Override
@@ -121,7 +121,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
                 if(ServerManager.remove(id()) == null){
                     completableFuture.complete(BaseResponse.success(null));
                 }
-                completableFuture.completeExceptionally(new FutureException("ServerManager 移除服务端缓存失败" + id()));
+                completableFuture.completeExceptionally(FutureException.show("ServerManager 移除服务端缓存失败" + id()));
             }
             completableFuture.completeExceptionally(f.cause());
         });

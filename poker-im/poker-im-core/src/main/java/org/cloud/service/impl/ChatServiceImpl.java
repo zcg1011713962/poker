@@ -42,7 +42,7 @@ public class ChatServiceImpl<T extends BaseResponse> implements ChatService<Base
                     return BaseResponse.success(response);
                 }).exceptionally((e)->{
                     log.error("{}", e);
-                    throw new FutureException(e.getMessage());
+                    throw FutureException.show(e.getMessage());
                 });
     }
 
@@ -58,7 +58,7 @@ public class ChatServiceImpl<T extends BaseResponse> implements ChatService<Base
                     return BaseResponse.success(response);
                 }).exceptionally((e)->{
                     log.error("{}", e);
-                    throw new FutureException(e.getMessage());
+                    throw FutureException.show(e.getMessage());
                 });
     }
 
@@ -79,7 +79,7 @@ public class ChatServiceImpl<T extends BaseResponse> implements ChatService<Base
                     return BaseResponse.success(response);
                 }).exceptionally((e)->{
                     log.error("{}", e);
-                    throw new FutureException(e.getMessage());
+                    throw FutureException.show(e.getMessage());
                 });
     }
 

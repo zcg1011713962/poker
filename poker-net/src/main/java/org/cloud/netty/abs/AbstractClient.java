@@ -39,7 +39,7 @@ public abstract class AbstractClient<T> implements Client<CompletableFuture<Base
         if (channel != null) {
             return channel;
         }
-        throw new FutureException("通道为空");
+        throw FutureException.show("通道为空");
     }
 
 
@@ -54,7 +54,7 @@ public abstract class AbstractClient<T> implements Client<CompletableFuture<Base
             channelHandler = optional.get();
             return;
         }
-        throw new FutureException("获取channelHandler失败");
+        throw FutureException.show("获取channelHandler失败");
     }
 
     @Override
@@ -83,7 +83,7 @@ public abstract class AbstractClient<T> implements Client<CompletableFuture<Base
                 if(ClientManager.remove(id()) == null){
                     completableFuture.complete(BaseResponse.success(null));
                 }
-                completableFuture.completeExceptionally(new FutureException("ClientManager 移除客户端缓存失败" + id()));
+                completableFuture.completeExceptionally(FutureException.show("ClientManager 移除客户端缓存失败" + id()));
             }
             completableFuture.completeExceptionally(f.cause());
         });
@@ -103,6 +103,6 @@ public abstract class AbstractClient<T> implements Client<CompletableFuture<Base
             });
             return completableFuture;
         }
-        throw new FutureException("通道不可用");
+        throw FutureException.show("通道不可用");
     }
 }

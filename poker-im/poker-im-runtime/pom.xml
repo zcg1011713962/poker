@@ -17,5 +17,39 @@
             <version>${revision}</version>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>release</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>./assembly/release.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <!--<execution>
+                        <id>lib</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <skipAssembly>false</skipAssembly>
+                            <descriptors>
+                                <descriptor>./assembly/lib-release.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>-->
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
