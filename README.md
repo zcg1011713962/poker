@@ -37,6 +37,12 @@ poker-gateway依赖poker-user获取用户信息作认证。
 
 
 ## 安装和运行
+linux:  
+1. 安装jdk1.8以上版本    
+2. 安装nacos-server-2.2.3    
+3. 修改各服务resource/application.yml配置  
+3. ./start.sh  
+
 
 ## 配置
 
