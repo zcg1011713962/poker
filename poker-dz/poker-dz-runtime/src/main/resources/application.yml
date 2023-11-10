@@ -14,3 +14,7 @@ spring:
         server-addr: 127.0.0.1:8848
         fail-fast: true
         group: spring-cloud
+#自定义格式解析protobuf
+protobuf:
+  user-defined:
+    enable: true

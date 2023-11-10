@@ -2,6 +2,7 @@ package org.cloud.protobuf;
 
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.emu.Protocol;
 import org.cloud.entity.common.BaseResponse;
@@ -29,7 +30,7 @@ public class ProtobufServer extends AbstractServer<CompletableFuture<BaseRespons
 
     @Override
     public CompletableFuture<BaseResponse> init() {
-        Bootstrap bootstrap = null;
+        ServerBootstrap bootstrap = null;
         try {
             manager();
             bootstrap = getWebSocketServer();

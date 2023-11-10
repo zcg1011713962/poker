@@ -2,6 +2,7 @@ package org.cloud.websocket;
 
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.emu.Protocol;
 import org.cloud.entity.common.BaseResponse;
@@ -30,7 +31,7 @@ public class WebSocketServer extends AbstractServer<CompletableFuture<BaseRespon
 
     @Override
     public CompletableFuture<BaseResponse> init() {
-        Bootstrap bootstrap = null;
+        ServerBootstrap bootstrap = null;
         try {
             manager();
             bootstrap = getWebSocketServer();
