@@ -44,11 +44,13 @@ public class PortUtil {
             Optional<Integer> opt = rtpPorts.stream().findFirst();
             if(opt.isPresent()){
                 Integer port = opt.get();
-                if(checkPort(port) && rtpPorts.remove(port))  return port;
-                throw new FutureException("端口被占用或RTP端口移除失败");
+                if(checkPort(port) && rtpPorts.remove(port)) {
+                    return port;
+                }
+                throw FutureException.show("端口被占用或RTP端口移除失败");
             }
         }
-        throw new FutureException("没用可用的RTP端口");
+        throw FutureException.show("没用可用的RTP端口");
     }
 
     private static Integer getRtcp(){
@@ -56,11 +58,13 @@ public class PortUtil {
             Optional<Integer> opt = rtcpPorts.stream().findFirst();
             if(opt.isPresent()){
                 Integer port = opt.get();
-                if(checkPort(port) && rtcpPorts.remove(port)) return port;
-                throw new FutureException("端口被占用或Rtcp端口移除失败");
+                if(checkPort(port) && rtcpPorts.remove(port)) {
+                    return port;
+                }
+                throw FutureException.show("端口被占用或Rtcp端口移除失败");
             }
         }
-        throw new FutureException("没用可用的Rtcp端口");
+        throw FutureException.show("没用可用的Rtcp端口");
     }
 
     /**

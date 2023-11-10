@@ -2,13 +2,14 @@ package org.cloud.websocket;
 
 
 import io.netty.bootstrap.Bootstrap;
+import lombok.extern.slf4j.Slf4j;
 import org.cloud.emu.Protocol;
 import org.cloud.entity.common.BaseResponse;
 import org.cloud.manager.ServerManager;
 import org.cloud.netty.abs.AbstractServer;
 
 import java.util.concurrent.CompletableFuture;
-
+@Slf4j
 public class WebSocket extends AbstractServer<CompletableFuture<BaseResponse>> {
 
     private WebSocket(int port) {
@@ -33,6 +34,7 @@ public class WebSocket extends AbstractServer<CompletableFuture<BaseResponse>> {
             manager();
             bootstrap = getWebSocketServer();
         } catch (Exception e) {
+            log.error("{}", e);
             CompletableFuture c = new CompletableFuture();
             c.completeExceptionally(e.getCause());
             return c;

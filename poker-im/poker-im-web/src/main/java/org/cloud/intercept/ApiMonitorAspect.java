@@ -39,7 +39,7 @@ public class ApiMonitorAspect {
             if(rateLimiter.tryAcquire()){
                 result = joinPoint.proceed();
             }else{
-                throw new FutureException(HttpStatus.HTTP_FORBIDDEN, "访问频繁,请稍后再试");
+                throw FutureException.show(HttpStatus.HTTP_FORBIDDEN, "访问频繁,请稍后再试");
             }
         } catch (Throwable e) {
             throw e;

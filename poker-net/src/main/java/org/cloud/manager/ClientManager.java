@@ -24,7 +24,9 @@ public class ClientManager {
     }
 
     public static Channel channel(String channelId) {
-        if (StrUtil.isBlank(channelId)) throw new FutureException("channelId is null");
+        if (StrUtil.isBlank(channelId)) {
+            throw FutureException.show("channelId is null");
+        }
         Iterator<Map.Entry<String, Client>> it = clientMap.entrySet().iterator();
         while (it.hasNext()) {
             Channel c = it.next().getValue().channel();
@@ -32,11 +34,11 @@ public class ClientManager {
                 return c;
             }
         }
-        throw new FutureException("根据channelId" + channelId + "获取不到channel");
+        throw FutureException.show("根据channelId" + channelId + "获取不到channel");
     }
 
     public static Client client(String channelId) {
-        if (StrUtil.isBlank(channelId))  throw new FutureException("channelId is null");
+        if (StrUtil.isBlank(channelId))  throw FutureException.show("channelId is null");
         Iterator<Map.Entry<String, Client>> it = clientMap.entrySet().iterator();
         while (it.hasNext()) {
             Client client = it.next().getValue();
@@ -45,7 +47,7 @@ public class ClientManager {
                 return client;
             }
         }
-        throw new FutureException("根据channelId" + channelId + "获取不到client");
+        throw FutureException.show("根据channelId" + channelId + "获取不到client");
     }
 
     public static Client remove(String clientId) {

@@ -1,4 +1,4 @@
-package org.cloud.entity.pro;
+package org.cloud.entity.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

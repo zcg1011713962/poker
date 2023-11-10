@@ -80,7 +80,7 @@ public abstract class DefaultRtspMethodHandler<T> extends RtspMethodHandler<Rtsp
         String sessionLine = headers.get(RtspHeaderNames.SESSION);
         int cseq = Integer.parseInt(headers.get(RtspHeaderNames.CSEQ)) + 1;
         if(StrUtil.isBlank(sessionLine)){
-            throw new FutureException("setup session return null");
+            throw FutureException.show("setup session return null");
         }
         String [] s = sessionLine.split(";");
         String session = s[0].trim();
