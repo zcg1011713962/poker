@@ -18,22 +18,22 @@
 6. 表示层: 使用spring-webflux处理Web登录请求。
 
 ### 模块说明
-1、poker-common: 基础公共包
-2、poker-dz: 德州扑克服务
-3、poker-gateway web登录认证服务
-4、poker-im 聊天服务
-5、poker-net 网络通信、协议分发模块
-6、poker-rpc-api 内部服务远程调用公共接口模块
-7、poker-user 用户信息服务
-8、poker-video 视频服务
+1、poker-common: 基础公共包  
+2、poker-dz: 德州扑克服务  
+3、poker-gateway web登录认证服务  
+4、poker-im 聊天服务  
+5、poker-net 网络通信、协议分发模块  
+6、poker-rpc-api 内部服务远程调用公共接口模块  
+7、poker-user 用户信息服务  
+8、poker-video 视频服务  
 
 ### 依赖关系
-poker-net 依赖poker-common提供工具类。
-poker-dz 德州扑克服务依赖poker-net提供网络协议通讯。
-poker-im 聊天服务依赖poker-net提供网络协议通讯。
-poker-video 视频服务依赖poker-net提供网络协议通讯。
-poker-user依赖poker-rpc-api给需要用户服务的服务提供服务。
-poker-gateway依赖poker-user获取用户信息作认证。
+poker-net 依赖poker-common提供工具类。  
+poker-dz 德州扑克服务依赖poker-net提供网络协议通讯。  
+poker-im 聊天服务依赖poker-net提供网络协议通讯。   
+poker-video 视频服务依赖poker-net提供网络协议通讯。  
+poker-user依赖poker-rpc-api给需要用户服务的服务提供服务。  
+poker-gateway依赖poker-user获取用户信息作认证。  
 
 
 ## 安装和运行
