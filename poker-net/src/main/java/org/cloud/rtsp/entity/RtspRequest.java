@@ -1,4 +1,4 @@
-package org.cloud.web;
+package org.cloud.rtsp.entity;
 
 
 import lombok.Data;

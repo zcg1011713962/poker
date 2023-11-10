@@ -1,4 +1,4 @@
-package org.cloud.websocket;
+package org.cloud.protobuf;
 
 
 import io.netty.bootstrap.Bootstrap;
@@ -10,15 +10,15 @@ import org.cloud.netty.abs.AbstractServer;
 
 import java.util.concurrent.CompletableFuture;
 @Slf4j
-public class WebSocket extends AbstractServer<CompletableFuture<BaseResponse>> {
+public class ProtobufServer extends AbstractServer<CompletableFuture<BaseResponse>> {
 
-    private WebSocket(int port) {
+    private ProtobufServer(int port) {
         super(port);
     }
 
     @Override
     public Protocol protocol() {
-        return Protocol.WEBSOCKET;
+        return Protocol.WEBSOCKET_PROTOBUF;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class WebSocket extends AbstractServer<CompletableFuture<BaseResponse>> {
         }
 
         public CompletableFuture<BaseResponse> build() {
-            WebSocket webSocket = new WebSocket(port);
+            ProtobufServer webSocket = new ProtobufServer(port);
             return webSocket.init();
         }
 

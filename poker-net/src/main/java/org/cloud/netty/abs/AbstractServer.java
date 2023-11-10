@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.cloud.emu.Protocol;
 import org.cloud.entity.common.BaseResponse;
 import org.cloud.entity.exception.FutureException;
+import org.cloud.enums.SocketPort;
 import org.cloud.manager.CacheManager;
 import org.cloud.manager.EventLoopGroupManager;
 import org.cloud.manager.ServerManager;
@@ -95,7 +96,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
             bootstrap.bind(port).sync().addListener((ChannelFutureListener) f -> {
                 if (f.isSuccess()) {
                     channel = f.channel();
-                    log.info("------成功监听端口-------{}", port);
+                    log.info("------成功监听端口-------{}:{}", SocketPort.getDescByPort(port), port);
                     completableFuture.complete(BaseResponse.success(null));
                 } else {
                     completableFuture.completeExceptionally(f.cause());
@@ -103,7 +104,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
             }).get();
         }catch (Exception e){
             log.error("{}", e.getMessage());
-            completableFuture.completeExceptionally(e.getCause());
+            completableFuture.completeExceptionally(e);
         }
         return completableFuture;
     }

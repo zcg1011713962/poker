@@ -1,4 +1,4 @@
-package org.cloud.poker.config;
+package org.cloud.protobuf.config;
 
 
 import io.netty.channel.ChannelHandler;
@@ -11,16 +11,14 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 import org.cloud.emu.Protocol;
 import org.cloud.manager.CacheManager;
 import org.cloud.netty.abs.AbstractInitializer;
-import org.cloud.poker.handler.BasePacketHandler;
-import org.cloud.poker.handler.BasePacketDecoder;
-import org.cloud.poker.handler.BasePacketEncoder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.cloud.protobuf.handler.BasePacketDecoder;
+import org.cloud.protobuf.handler.BasePacketEncoder;
+import org.cloud.protobuf.handler.BasePacketHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(prefix = "websocket", name = "enable", havingValue = "true")
-public class WebSocketConfiguration {
+public class ProtobufConfiguration {
 
     @Bean
     public AbstractInitializer websocketInitializer(){
@@ -44,7 +42,7 @@ public class WebSocketConfiguration {
                 pipeline.addLast(new ChannelHandler[]{new BasePacketEncoder()});
             }
         };
-        CacheManager.protocolTable().put(Protocol.WEBSOCKET, handler, false);
+        CacheManager.protocolTable().put(Protocol.WEBSOCKET_PROTOBUF, handler, false);
         return handler;
     }
 

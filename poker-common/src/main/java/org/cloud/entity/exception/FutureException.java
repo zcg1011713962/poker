@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.cloud.enums.ErrorCode;
 
 import java.io.Serializable;
+
+/**
+ * future异常处理
+ */
 @Slf4j
 @Data
 @AllArgsConstructor
@@ -26,12 +30,12 @@ public class FutureException extends RuntimeException implements Serializable {
     }
 
     public static FutureException show(int code, String message){
-        return FutureException.show(code, message);
+        return new FutureException(code, message);
     }
 
     public static FutureException show(String message){
         String msg = String.join(":", ErrorCode.FUTURE_ERROR.getDesc(), message);
-        return FutureException.show(ErrorCode.FUTURE_ERROR.getId(), msg);
+        return new FutureException(ErrorCode.FUTURE_ERROR.getCode(), msg);
     }
 
 }

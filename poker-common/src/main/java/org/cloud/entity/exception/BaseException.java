@@ -28,12 +28,12 @@ public class BaseException extends RuntimeException implements Serializable {
     }
 
     public static BaseException show(ErrorCode errorCode, String message){
-        return new BaseException(errorCode.getId(), message);
+        return new BaseException(errorCode.getCode(), message);
     }
 
     public static BaseException show(String message){
         String msg = String.join(":", ErrorCode.PACKET_FORMAT_ERROR.getDesc(), message);
-        return new BaseException(ErrorCode.PACKET_FORMAT_ERROR.getId(), msg);
+        return new BaseException(ErrorCode.PACKET_FORMAT_ERROR.getCode(), msg);
     }
 
 }
