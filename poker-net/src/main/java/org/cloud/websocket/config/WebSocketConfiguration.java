@@ -1,4 +1,4 @@
-package org.cloud.config;
+package org.cloud.websocket.config;
 
 
 import io.netty.channel.ChannelPipeline;
@@ -8,11 +8,11 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import org.cloud.emu.Protocol;
-import org.cloud.handler.websocket.BinaryWebSocketFrameHandler;
-import org.cloud.handler.websocket.TextWebSocketHandler;
+import org.cloud.entity.properties.WebSocketProperties;
 import org.cloud.manager.CacheManager;
 import org.cloud.netty.abs.AbstractInitializer;
-import org.cloud.properties.WebSocketProperties;
+import org.cloud.websocket.handler.BinaryWebSocketFrameHandler;
+import org.cloud.websocket.handler.TextWebSocketHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

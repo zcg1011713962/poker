@@ -1,4 +1,4 @@
-package org.cloud.handler.websocket;
+package org.cloud.websocket.handler;
 
 
 import io.netty.channel.ChannelHandlerContext;

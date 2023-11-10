@@ -1,4 +1,5 @@
-package org.cloud.config;
+package org.cloud.rtsp.config;
+
 
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -6,14 +7,14 @@ import io.netty.handler.codec.rtsp.RtspDecoder;
 import io.netty.handler.proxy.Socks4ProxyHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.cloud.emu.Protocol;
-import org.cloud.handler.rtsp.RtspResponseHandler;
+import org.cloud.entity.properties.RtspProperties;
 import org.cloud.manager.CacheManager;
 import org.cloud.netty.UserEventHandler;
 import org.cloud.netty.abs.AbstractInitializer;
+import org.cloud.rtsp.handler.RtspResponseHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.cloud.properties.RtspProperties;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;

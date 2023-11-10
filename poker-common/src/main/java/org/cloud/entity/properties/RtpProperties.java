@@ -1,4 +1,4 @@
-package org.cloud.properties;
+package org.cloud.entity.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
