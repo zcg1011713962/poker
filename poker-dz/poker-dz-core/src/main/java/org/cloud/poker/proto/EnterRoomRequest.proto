@@ -1,0 +1,6 @@
+syntax = "proto3";
+option java_package = "org.cloud.poker.proto.request";
+option java_outer_classname = "EnterRoomIn";
+message EnterRoomRequest{
+    string userId = 1;
+}
