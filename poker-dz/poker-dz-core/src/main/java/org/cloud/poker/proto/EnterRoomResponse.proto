@@ -1,0 +1,7 @@
+syntax = "proto3";
+option java_package = "org.cloud.poker.proto.response";
+option java_outer_classname = "EnterRoomOut";
+message EnterRoomResponse{
+    int32 code = 1;
+    string msg = 2;
+}

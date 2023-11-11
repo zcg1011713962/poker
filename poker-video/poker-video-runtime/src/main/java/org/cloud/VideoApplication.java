@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
-@SpringBootApplication(scanBasePackages = {"org.cloud"})
+@SpringBootApplication(scanBasePackages = {"org.cloud.rtsp.config","org.cloud.entity.properties"})
 @EnableWebFlux
 @EnableDiscoveryClient
 public class VideoApplication {

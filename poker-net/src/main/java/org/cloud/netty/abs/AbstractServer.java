@@ -2,14 +2,18 @@ package org.cloud.netty.abs;
 
 import cn.hutool.core.lang.UUID;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.emu.Protocol;
 import org.cloud.entity.common.BaseResponse;
 import org.cloud.entity.exception.FutureException;
+import org.cloud.enums.SocketPort;
 import org.cloud.manager.CacheManager;
 import org.cloud.manager.EventLoopGroupManager;
 import org.cloud.manager.ServerManager;
@@ -21,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 public abstract class AbstractServer<T> implements Server<CompletableFuture<BaseResponse>> {
     private static volatile Bootstrap udpBootstrap;
-    private static volatile Bootstrap websocketBootstrap;
+    private static volatile ServerBootstrap websocketBootstrap;
     private ChannelHandler channelHandler;
     private String id;
     protected int port;
@@ -55,6 +59,11 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
     }
 
     @Override
+    public EventLoopGroup getBossGroup() {
+        return EventLoopGroupManager.getBossGroup();
+    }
+
+    @Override
     public EventLoopGroup getWorkerGroup() {
         return EventLoopGroupManager.getWorkGroup();
     }
@@ -75,17 +84,38 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
     }
 
     @Override
-    public Bootstrap getWebSocketServer() {
+    public ServerBootstrap getWebSocketServer() {
         if (websocketBootstrap == null) {
             synchronized (Server.class) {
                 if (websocketBootstrap == null) {
-                    websocketBootstrap = new Bootstrap().group(getWorkerGroup())
+                    websocketBootstrap = new ServerBootstrap().group(getWorkerGroup(), getWorkerGroup())
                             .channel(NioServerSocketChannel.class)
-                            .handler(channelHandler);
+                            .handler(new LoggingHandler(LogLevel.INFO))
+                            .childHandler(channelHandler);
                 }
             }
         }
         return websocketBootstrap;
+    }
+
+    @Override
+    public CompletableFuture<BaseResponse> bind(ServerBootstrap bootstrap) {
+        CompletableFuture<BaseResponse> completableFuture = new CompletableFuture<>();
+        try {
+            bootstrap.bind(port).sync().addListener((ChannelFutureListener) f -> {
+                if (f.isSuccess()) {
+                    channel = f.channel();
+                    log.info("------成功监听端口-------{}:{}", SocketPort.getDescByPort(port), port);
+                    completableFuture.complete(BaseResponse.success(null));
+                } else {
+                    completableFuture.completeExceptionally(f.cause());
+                }
+            }).get();
+        }catch (Exception e){
+            log.error("{}", e.getMessage());
+            completableFuture.completeExceptionally(e);
+        }
+        return completableFuture;
     }
 
     @Override
@@ -95,7 +125,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
             bootstrap.bind(port).sync().addListener((ChannelFutureListener) f -> {
                 if (f.isSuccess()) {
                     channel = f.channel();
-                    log.info("------成功监听端口-------{}", port);
+                    log.info("------成功监听端口-------{}:{}", SocketPort.getDescByPort(port), port);
                     completableFuture.complete(BaseResponse.success(null));
                 } else {
                     completableFuture.completeExceptionally(f.cause());
@@ -103,7 +133,7 @@ public abstract class AbstractServer<T> implements Server<CompletableFuture<Base
             }).get();
         }catch (Exception e){
             log.error("{}", e.getMessage());
-            completableFuture.completeExceptionally(e.getCause());
+            completableFuture.completeExceptionally(e);
         }
         return completableFuture;
     }

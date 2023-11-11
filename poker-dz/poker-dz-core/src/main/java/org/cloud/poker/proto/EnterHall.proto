@@ -1,7 +1,0 @@
-syntax = "proto3";
-option java_package = "org.cloud.poker.proto.entity";
-option java_outer_classname = "EnterHall";
-message LoginRequest{
-    string user_name = 1;
-    string pass_word = 2;
-}

@@ -1,6 +1,7 @@
 package org.cloud.netty.service;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 
 public interface Server<T> extends Connection<T> {
 
@@ -16,7 +17,7 @@ public interface Server<T> extends Connection<T> {
      * websocket server
      * @return
      */
-    default Bootstrap getWebSocketServer(){
+    default ServerBootstrap getWebSocketServer(){
         return null;
     }
 

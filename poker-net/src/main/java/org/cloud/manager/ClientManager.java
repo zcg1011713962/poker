@@ -38,7 +38,9 @@ public class ClientManager {
     }
 
     public static Client client(String channelId) {
-        if (StrUtil.isBlank(channelId))  throw FutureException.show("channelId is null");
+        if (StrUtil.isBlank(channelId)) {
+            throw FutureException.show("channelId is null");
+        }
         Iterator<Map.Entry<String, Client>> it = clientMap.entrySet().iterator();
         while (it.hasNext()) {
             Client client = it.next().getValue();

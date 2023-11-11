@@ -2,10 +2,9 @@ package org.cloud.rtsp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.entity.common.BaseResponse;
-import org.cloud.web.RtspRequest;
+import org.cloud.rtsp.entity.RtspRequest;
 import org.cloud.manager.ClientManager;
 import org.cloud.netty.service.RtspService;
-import org.cloud.rtsp.RtspClient;
 import org.cloud.rtsp.entity.RtspReqPacket;
 import org.cloud.rtsp.entity.RtspUrlParser;
 import org.springframework.stereotype.Component;

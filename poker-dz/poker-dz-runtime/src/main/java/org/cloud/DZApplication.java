@@ -1,21 +1,32 @@
 package org.cloud;
 
 
-import org.cloud.websocket.WebSocket;
+import lombok.extern.slf4j.Slf4j;
+import org.cloud.enums.SocketPort;
+import org.cloud.protobuf.ProtobufServer;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutionException;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.cloud.protobuf.config","org.cloud.protobuf.handler","org.cloud.poker.game.handler"})
 public class DZApplication {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        initSocket();
+    public static void main(String[] args) {
         SpringApplication.run(DZApplication.class, args);
     }
 
-    private static void initSocket() throws ExecutionException, InterruptedException {
-        new WebSocket.Builder().setPort(9999).build().get();
+    @Component
+    @Slf4j
+    private static class ProtobufListenerPort implements CommandLineRunner {
+        @Override
+        public void run(String... args) throws Exception {
+            new ProtobufServer.Builder().setPort(SocketPort.WEBSOCKET_PROTOBUF_DZ.getPort()).build().exceptionally(e ->{
+                log.error("{}", e);
+                return null;
+            }).get();
+        }
     }
 
 }
