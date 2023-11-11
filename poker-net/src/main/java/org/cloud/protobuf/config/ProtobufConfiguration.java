@@ -1,11 +1,9 @@
 package org.cloud.protobuf.config;
 
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
@@ -15,7 +13,7 @@ import org.cloud.manager.CacheManager;
 import org.cloud.netty.abs.AbstractInitializer;
 import org.cloud.protobuf.handler.BasePacketDecoder;
 import org.cloud.protobuf.handler.BasePacketEncoder;
-import org.cloud.protobuf.handler.BasePacketHandler;
+import org.cloud.protobuf.handler.ProtobufHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
 public class ProtobufConfiguration {
 
     @Bean
-    public AbstractInitializer websocketInitializer(){
+    public AbstractInitializer websocketInitializer(ProtobufHandler protobufHandler){
         // SocketChannel双向通信
         AbstractInitializer handler = new AbstractInitializer<SocketChannel>(false) {
             @Override
@@ -46,7 +44,7 @@ public class ProtobufConfiguration {
                 pipeline.addLast(new WebSocketServerProtocolHandler("/dz"));
                 // 自定义编解码
                 pipeline.addLast(new ChannelHandler[]{new BasePacketDecoder()});
-                pipeline.addLast(new BasePacketHandler());
+                pipeline.addLast(protobufHandler);
                 pipeline.addLast(new ChannelHandler[]{new BasePacketEncoder()});
             }
         };

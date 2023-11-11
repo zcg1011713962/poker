@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutionException;
 
-@SpringBootApplication(scanBasePackages = {"org.cloud.protobuf.config"})
+@SpringBootApplication(scanBasePackages = {"org.cloud.protobuf.config","org.cloud.protobuf.handler","org.cloud.poker.game.handler"})
 public class DZApplication {
     public static void main(String[] args) {
         SpringApplication.run(DZApplication.class, args);

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BasePacket {
-    private short cmd;
+    private short protoCode;
     private byte[] bytes;
 
 }

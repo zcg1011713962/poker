@@ -19,8 +19,8 @@ public class BasePacketEncoder extends ChannelOutboundHandlerAdapter {
             buf.writeByte(124);
             // 包长
             buf.writeShort(packet.getBytes().length);
-            // 指令
-            buf.writeShort(packet.getCmd());
+            // 协议码
+            buf.writeShort(packet.getProtoCode());
             // 数据
             buf.writeBytes(packet.getBytes());
             BinaryWebSocketFrame frame = new BinaryWebSocketFrame(buf);

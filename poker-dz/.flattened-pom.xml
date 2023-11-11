@@ -18,11 +18,6 @@
   <dependencies>
     <dependency>
       <groupId>cloud</groupId>
-      <artifactId>poker-common</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>cloud</groupId>
       <artifactId>poker-net</artifactId>
       <version>${revision}</version>
     </dependency>
