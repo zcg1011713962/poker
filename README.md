@@ -51,6 +51,8 @@ linux:
 ## 贡献
 
 ## 文档
+[protobuf编译成ts](https://www.npmjs.com/package/pbjs)  
+1.pbjs D:\coding\poker-client\assets\scripts\proto\EnterRoomRequest.proto --ts D:\coding\poker-client\assets\EnterRoomRequest.ts  
 
 ## 许可证
 
