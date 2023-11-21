@@ -5,9 +5,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import lombok.extern.slf4j.Slf4j;
 import org.cloud.entity.exception.BaseException;
 import org.cloud.entity.poker.BasePacket;
-
+@Slf4j
 public class BasePacketDecoder extends ChannelInboundHandlerAdapter {
 
     @Override
@@ -44,6 +46,8 @@ public class BasePacketDecoder extends ChannelInboundHandlerAdapter {
                     in.release();
                 }
             }
+        } else if(msg instanceof TextWebSocketFrame){
+            log.info("receive PING form client");
         } else {
             ctx.fireChannelRead(msg);
         }

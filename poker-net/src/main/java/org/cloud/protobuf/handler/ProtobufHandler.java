@@ -6,8 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.cloud.entity.poker.BasePacket;
 import org.cloud.netty.abs.AbstractInboundHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * 接收BasePacket类型数据包

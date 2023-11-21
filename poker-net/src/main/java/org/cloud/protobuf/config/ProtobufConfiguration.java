@@ -8,6 +8,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.cloud.emu.Protocol;
 import org.cloud.manager.CacheManager;
 import org.cloud.netty.abs.AbstractInitializer;
@@ -49,7 +50,8 @@ public class ProtobufConfiguration {
                 //参数指的是context_path
                 pipeline.addLast(new WebSocketServerProtocolHandler("/dz"));
                 // 空闲检测超时
-                pipeline.addLast(new StateHandler());
+                pipeline.addLast(new IdleStateHandler(120, 120, 120));
+                pipeline.addLast(new WebSocketHeartbeatHandler());
                 // 自定义编解码
                 pipeline.addLast(new ChannelHandler[]{new BasePacketDecoder()});
                 pipeline.addLast(protobufHandler);
