@@ -5,9 +5,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import lombok.extern.slf4j.Slf4j;
 import org.cloud.entity.exception.BaseException;
 import org.cloud.entity.poker.BasePacket;
-
+@Slf4j
 public class BasePacketDecoder extends ChannelInboundHandlerAdapter {
 
     @Override
@@ -16,24 +18,25 @@ public class BasePacketDecoder extends ChannelInboundHandlerAdapter {
             ByteBuf in = null;
             try {
                 in = ((BinaryWebSocketFrame)msg).content();
-                if (in.readableBytes() < 5) {
-                    throw BaseException.show("长度不足5");
+                // 前置约定长度3
+                if (in.readableBytes() < 3) {
+                    throw BaseException.show("长度不足前置约定长度3");
                 }
-                // 一字节--填充
-                if (in.readByte() != 124) {
-                    throw BaseException.show("非约定格式");
+                // 一字节--约定标志位
+                if (in.readByte() != 110) {
+                    throw BaseException.show("非约定标志位");
                 }
-                // 两字节--包长
-                short length = in.readShort();
+                // 一字节--cmd
+                byte cmd = in.readByte();
+                // 一字节--包长
+                byte length = in.readByte();
                 if (length < 0 || length > 20480) {
                     throw BaseException.show("包长大于20480或者小于0");
                 }
-                // 两字节--指令
-                short cmd = in.readShort();
+                // 数据包
                 if (in.readableBytes() < length) {
-                    throw BaseException.show("非约定格式");
+                    throw BaseException.show("包长不足,非约定格式数据包");
                 }
-                // 数据
                 byte[] bytes = new byte[length];
                 in.readBytes(bytes);
                 ctx.fireChannelRead(new BasePacket(cmd, bytes));
@@ -43,6 +46,8 @@ public class BasePacketDecoder extends ChannelInboundHandlerAdapter {
                     in.release();
                 }
             }
+        } else if(msg instanceof TextWebSocketFrame){
+            log.info("receive PING form client");
         } else {
             ctx.fireChannelRead(msg);
         }

@@ -8,15 +8,15 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.cloud.emu.Protocol;
 import org.cloud.manager.CacheManager;
 import org.cloud.netty.abs.AbstractInitializer;
-import org.cloud.protobuf.handler.BasePacketDecoder;
-import org.cloud.protobuf.handler.BasePacketEncoder;
-import org.cloud.protobuf.handler.ProtobufHandler;
+import org.cloud.protobuf.handler.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
  * 自定义protobuf编解码器
@@ -24,6 +24,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnProperty(prefix = "protobuf.user-defined", name = "enable", havingValue = "true")
 public class ProtobufConfiguration {
+
+    // 使用 @Scope 注解声明为原型（多例）作用域
+    @Bean
+    @Scope("prototype")
+    public ProtobufHandler protobufHandler(DispatcherHandler dispatcherHandler) {
+        return new ProtobufHandler(dispatcherHandler);
+    }
 
     @Bean
     public AbstractInitializer websocketInitializer(ProtobufHandler protobufHandler){
@@ -42,6 +49,9 @@ public class ProtobufConfiguration {
                 //ws://localhost:9999/ws
                 //参数指的是context_path
                 pipeline.addLast(new WebSocketServerProtocolHandler("/dz"));
+                // 空闲检测超时
+                pipeline.addLast(new IdleStateHandler(120, 120, 120));
+                pipeline.addLast(new WebSocketHeartbeatHandler());
                 // 自定义编解码
                 pipeline.addLast(new ChannelHandler[]{new BasePacketDecoder()});
                 pipeline.addLast(protobufHandler);
