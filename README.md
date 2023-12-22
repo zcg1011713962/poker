@@ -2,20 +2,26 @@
 扑克-分布式微服务架构，包含网关服务、用户服务、德州扑克服务、斗地主服务、IM服务、视频服务。
 ## 技术栈
 - java
-- springcloud、dubbo、spring-webflu、netty、protobuf
-- mybatis-plus
-- mysql、redis
+- springcloud-alibaba、springboot、dubbo、spring-webflu、netty、websocket、protobuf
+- mybatis、mybatis-plus
+- mysql、redis、mongo
 
 ## 架构概述
 
 该项目采用分层架构，主要包括以下组件：
 
-1. 业务逻辑层: 使用springcloud实现服务。
-2. 数据访问层: 利用mybatis-plus实现对数据库的访问,使用redis实现非关系型缓存。
-3. 数据库层: 使用mysql存储数据。
-4. 集成层: 使用dubbo处理服务之间的远程调用,负载均衡, 使用netty处理与客户端protobuf协议的通信。
-5. 服务发现层: 使用nacos服务发现和配置管理。
-6. 表示层: 使用spring-webflux处理Web登录请求。
+1. 通讯层: 使用dubbo处理服务之间的远程调用,负载均衡, 使用netty处理与客户端protobuf协议的通信。  
+2. 服务层: 利用mybatis-plus实现对数据库的访问,使用nacos服务发现和配置管理,使用spring-webflux处理Web登录请求。  
+3. 数据库层: 使用mysql实现关系型存储,使用redis实现非关系型缓存,使用mongo实现非关系型存储。  
+
+### 系统架构图
+#### 应用架构图
+
+![](assets/poker应用架构图.png)
+
+#### 业务架构图
+
+
 
 ### 模块说明
 1、poker-common: 基础公共包  
